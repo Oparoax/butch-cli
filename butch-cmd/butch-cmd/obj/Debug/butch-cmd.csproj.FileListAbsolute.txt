@@ -1,0 +1,6 @@
+C:\Users\jdawe\Desktop\Github\butch-cmd\butch-cmd\butch-cmd\bin\Debug\butch_cmd.exe
+C:\Users\jdawe\Desktop\Github\butch-cmd\butch-cmd\butch-cmd\bin\Debug\butch_cmd.pdb
+C:\Users\jdawe\Desktop\Github\butch-cmd\butch-cmd\butch-cmd\obj\Debug\butch-cmd.csproj.AssemblyReference.cache
+C:\Users\jdawe\Desktop\Github\butch-cmd\butch-cmd\butch-cmd\obj\Debug\butch-cmd.csproj.CoreCompileInputs.cache
+C:\Users\jdawe\Desktop\Github\butch-cmd\butch-cmd\butch-cmd\obj\Debug\butch_cmd.exe
+C:\Users\jdawe\Desktop\Github\butch-cmd\butch-cmd\butch-cmd\obj\Debug\butch_cmd.pdb
