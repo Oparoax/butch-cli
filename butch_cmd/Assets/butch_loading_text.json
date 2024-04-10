@@ -7,7 +7,7 @@
         },
         {
             "name": "Flux capacitor, capciting",
-            "delay": 0.02,
+            "delay": 0.01,
             "complete": true
         },
         {
@@ -17,14 +17,23 @@
         },
         {
             "name": "Cyber glutes, flexing",
-            "delay": 0.02,
+            "delay": 0.01,
             "complete": true
         },
         {
             "name": "Speech centre, loading",
             "delay": 0.02,
             "complete": false
-
+        },
+        {
+            "name": "Krenal Though Correction Protocols, loading",
+            "delay": 0.02,
+            "complete": true
+        },
+        {
+            "name": "Agression Centre, agressing",
+            "delay": 0.03,
+            "complete": false
         }
     ]
 }
