@@ -1,17 +1,30 @@
 { 
-    "phrases":[
-    "Your gonna need a bigger boat",
-    "YippieKayYae",
-    "I feel the need... the need for speed",
-    "There's nothing more important than family",
-    "You're a disease, and I'm the cure",
-    "Another day to die hard",
-    "Here comes two words for you . . . Shut the fuck up",
-    "let me do it my way. Just give me an unmarked and a shotgun",
-    "Never send a boy to do a man's job",
-    "If it bleeds, we can kill it",
-    "You were only supposed to blow the bloody doors off",
-    "I did not hit her, I did nootTTTTT. Oh Hi mark",
-    "It's not a tumor"
+    "progress_msgs":[
+        {
+            "name": "Turbo Injected Cardio, injecting",
+            "delay": 0.02,
+            "complete": true
+        },
+        {
+            "name": "Flux capacitor, capciting",
+            "delay": 0.02,
+            "complete": true
+        },
+        {
+            "name": "Nano machines, intialising",
+            "delay": 0.02,
+            "complete": true
+        },
+        {
+            "name": "Cyber glutes, flexing",
+            "delay": 0.02,
+            "complete": true
+        },
+        {
+            "name": "Speech centre, loading",
+            "delay": 0.02,
+            "complete": false
+
+        }
     ]
 }
