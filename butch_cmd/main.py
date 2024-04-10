@@ -1,6 +1,6 @@
-import datetime
 import json
 import random
+import sys
 import time
 
 from progress.bar import Bar, ShadyBar
@@ -15,21 +15,63 @@ class ConsoleHandler:
         self.butch_phrases = self.importer.phrases
         self.progress_msgs = self.importer.progress_msgs
 
-        self.butch_phrases = Butch(self.butch_phrases)
+        self.butch = Butch(self.butch_phrases)
 
     def play_intro(self):
-        self.progress_display.spinner('Welcome to...', 3, '')
-        time.sleep(0.5)
+        self.progress_display.spinner('Welcome to ..', 2, "")
+
+        print('\n')
+
+        time.sleep(1)
+
         print(f"{self.importer.get_file_content('Assets/title.txt')} \n")
 
         for msg in self.progress_msgs["progress_msgs"]:
             self.progress_display.loading_bar(msg['name'], msg['delay'], msg['complete'])
 
-        print(self.importer.get_file_content('Assets/complete.txt'))
+        time.sleep(2)
+
+        print(self.importer.get_file_content('Assets/butchportrait.txt'))
 
         time.sleep(1)
 
-        print(self.importer.get_file_content('Assets/butchportrait.txt'))
+        print(self.importer.get_file_content('Assets/complete.txt'))
+
+        print('\n')
+
+        print('Welcome to butch-os v1.0:')
+
+    def listen_for_input(self):
+        input_str = input()
+
+        input_str.strip()
+        keywords = input_str.split(" ")
+
+        for keyword in keywords:
+            keyword = keyword.lower()
+            keyword = keyword.strip()
+
+        match keywords[0]:
+            case 'butch':
+                self.butch_commands(keywords)
+                return
+            case 'help':
+                return
+            case 'exit':
+                sys.exit()
+            case _:
+                print("Command not recognised")
+
+    def butch_commands(self, commands):
+
+        match commands[1]:
+            case 'speak':
+                print(f"butch says: {self.butch.play_butch_phrase()}")
+            case 'takeaway':
+                print(
+                    "Two Number 9's,\n a number 9 large,\n number 6 with extra dip,\n number 7,\n 2 number 45's, one with cheese,\n and a large soda")
+            case _:
+                print("Command not recognised")
 
 
 class Butch:
@@ -37,7 +79,7 @@ class Butch:
         self.phrases = phrases
 
     def play_butch_phrase(self):
-        print(random.choice(self.phrases))
+        return random.choice(self.phrases['phrases'])
 
 
 class ProgressDisplay:
@@ -57,7 +99,7 @@ class ProgressDisplay:
             self.funk_print.pr_red("WTF that delay is too long")
             return
 
-        with Bar(process_name, max=self.bar_max) as bar:
+        with ShadyBar(process_name, max=self.bar_max) as bar:
             for i in range(bar_max):
                 # Do some work
                 time.sleep(delay)
@@ -65,16 +107,19 @@ class ProgressDisplay:
             bar.finish()
             self.funk_print.pr_result(is_completed)
 
+    # broky
     def spinner(self, process_name, delay, complete_msg):
         spinner = Spinner(process_name)
         time_elapsed = 0
 
-        if delay > 30:
+        start = time.time()
+
+        if delay > 5:
             self.funk_print.pr_red("WTF that delay is too long")
             return
 
         while time_elapsed < delay:
-            time_elapsed += 
+            time_elapsed = time.time() - start
             spinner.next()
 
 
@@ -135,4 +180,8 @@ class FunkyPrint:
 if __name__ == '__main__':
     console = ConsoleHandler()
     console.play_intro()
+    is_finished = False
+
+    while not is_finished:
+        console.listen_for_input()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
