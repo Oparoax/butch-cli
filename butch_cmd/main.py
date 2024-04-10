@@ -18,7 +18,7 @@ class ConsoleHandler:
         self.butch_phrases = Butch(self.butch_phrases)
 
     def play_intro(self):
-        print("Welcome to....")
+        self.progress_display.spinner('Welcome to...', 3, '')
         time.sleep(0.5)
         print(f"{self.importer.get_file_content('Assets/title.txt')} \n")
 
@@ -43,6 +43,7 @@ class Butch:
 class ProgressDisplay:
     def __init__(self):
         self.bar_max = 100
+        self.funk_print = FunkyPrint()
 
     def loading_bar(self, process_name, delay, is_completed=True):
         if is_completed:
@@ -53,7 +54,7 @@ class ProgressDisplay:
             success_msg = 'Failed'
 
         if delay > 0.2:
-            print("WTF that delay is too long")
+            self.funk_print.pr_red("WTF that delay is too long")
             return
 
         with Bar(process_name, max=self.bar_max) as bar:
@@ -62,18 +63,18 @@ class ProgressDisplay:
                 time.sleep(delay)
                 bar.next()
             bar.finish()
-            print(success_msg)
+            self.funk_print.pr_result(is_completed)
 
     def spinner(self, process_name, delay, complete_msg):
         spinner = Spinner(process_name)
         time_elapsed = 0
 
-        if delay > 100:
-            print("WTF that delay is too long")
+        if delay > 30:
+            self.funk_print.pr_red("WTF that delay is too long")
             return
 
         while time_elapsed < delay:
-            time_elapsed += datetime.timedelta
+            time_elapsed += 
             spinner.next()
 
 
@@ -113,6 +114,21 @@ class FileImporter:
             return progress_msgs
         else:
             print('No progress msgs could be loaded for butch')
+
+
+class FunkyPrint:
+
+    def pr_result(self, result):
+        if result:
+            self.pr_green('Complete')
+        else:
+            self.pr_red('Failed')
+
+    def pr_red(self, txt):
+        print("\033[91m {}\033[00m".format(txt))
+
+    def pr_green(self, txt):
+        print("\033[92m {}\033[00m".format(txt))
 
 
 # Press the green button in the gutter to run the script.

@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="959f970c-2bd8-4f6a-8318-eb6f4d8fb035" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../butch_cmd/Assets/butch_loading_text.json" beforeDir="false" afterPath="$PROJECT_DIR$/../butch_cmd/Assets/butch_loading_text.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../butch_cmd/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../butch_cmd/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,27 +243,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712755810085</updated>
-      <workItem from="1712755817558" duration="7499000" />
+      <workItem from="1712755817558" duration="9000000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/../butch_cmd/main.py</url>
-          <line>105</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pythonProject$main.coverage" NAME="main Coverage Results" MODIFIED="1712755886842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/butch_cmd$main.coverage" NAME="main Coverage Results" MODIFIED="1712763195071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\jdawe\Desktop\Github\butch-cmd\butch_cmd" />
+    <SUITE FILE_PATH="coverage/butch_cmd$main.coverage" NAME="main Coverage Results" MODIFIED="1712764640338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\jdawe\Desktop\Github\butch-cmd\butch_cmd" />
     <SUITE FILE_PATH="coverage/butch_cmd$Python_Console.coverage" NAME="Python Console Coverage Results" MODIFIED="1712759178213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
