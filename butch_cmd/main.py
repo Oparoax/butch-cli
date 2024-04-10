@@ -15,17 +15,24 @@ class ConsoleHandler:
         self.butch_phrases = self.importer.phrases
         self.progress_msgs = self.importer.progress_msgs
 
-        self.butch_phrases = ButchPhrases(self.butch_phrases)
+        self.butch_phrases = Butch(self.butch_phrases)
 
     def play_intro(self):
         print("Welcome to....")
         time.sleep(0.5)
-        print(self.importer.get_file_content('Assets/title.txt'))
+        print(f"{self.importer.get_file_content('Assets/title.txt')} \n")
 
-        self.progress_display.loading_bar("Arms", 0.2, "Complete: Arm's locked and loaded")
+        for msg in self.progress_msgs["progress_msgs"]:
+            self.progress_display.loading_bar(msg['name'], msg['delay'], msg['complete'])
+
+        print(self.importer.get_file_content('Assets/complete.txt'))
+
+        time.sleep(1)
+
+        print(self.importer.get_file_content('Assets/butchportrait.txt'))
 
 
-class ButchPhrases:
+class Butch:
     def __init__(self, phrases):
         self.phrases = phrases
 
@@ -37,19 +44,25 @@ class ProgressDisplay:
     def __init__(self):
         self.bar_max = 100
 
-    def loading_bar(self, process_name, delay, complete_msg):
+    def loading_bar(self, process_name, delay, is_completed=True):
+        if is_completed:
+            bar_max = self.bar_max
+            success_msg = 'Completed'
+        else:
+            bar_max = self.bar_max - 20
+            success_msg = 'Failed'
+
         if delay > 0.2:
             print("WTF that delay is too long")
             return
 
         with Bar(process_name, max=self.bar_max) as bar:
-            for i in range(self.bar_max):
+            for i in range(bar_max):
                 # Do some work
                 time.sleep(delay)
                 bar.next()
             bar.finish()
-
-        print(complete_msg)
+            print(success_msg)
 
     def spinner(self, process_name, delay, complete_msg):
         spinner = Spinner(process_name)
@@ -94,7 +107,7 @@ class FileImporter:
             print('No phrases could be loaded for butch')
 
     def load_json_intro_progress(self):
-        progress_msgs = self.get_json_content('Assets/butch_progress.json')
+        progress_msgs = self.get_json_content('Assets/butch_loading_text.json')
 
         if progress_msgs is not None:
             return progress_msgs
