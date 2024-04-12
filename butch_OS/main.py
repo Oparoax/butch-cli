@@ -37,10 +37,6 @@ class ConsoleHandler:
 
         print(self.importer.get_file_content('Assets/complete.txt'))
 
-        print('\n')
-
-        print('Welcome to butch-os v1.0:')
-
     def listen_for_input(self):
         input_str = input()
 
@@ -107,7 +103,6 @@ class ProgressDisplay:
             bar.finish()
             self.funk_print.pr_result(is_completed)
 
-    # broky
     def spinner(self, process_name, delay, complete_msg):
         spinner = Spinner(process_name)
         time_elapsed = 0
@@ -179,9 +174,21 @@ class FunkyPrint:
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     console = ConsoleHandler()
-    console.play_intro()
+    debug_mode = False
+
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "-d":
+            debug_mode = True
+    else:
+        console.play_intro()
+
+    print("----------------------------")
+    print('= Welcome to butch-os v1.0 =')
+    print("----------------------------")
+
     is_finished = False
 
     while not is_finished:
         console.listen_for_input()
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
