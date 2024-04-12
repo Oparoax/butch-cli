@@ -3,7 +3,7 @@ import random
 import sys
 import time
 
-from progress.bar import Bar, ShadyBar
+from progress.bar import ShadyBar
 from progress.spinner import Spinner
 
 
@@ -65,7 +65,12 @@ class ConsoleHandler:
                 print(f"butch says: {self.butch.get_butch_phrase()}")
             case 'takeaway':
                 print(
-                    "Two Number 9's,\n a number 9 large,\n number 6 with extra dip,\n number 7,\n 2 number 45's, one with cheese,\n and a large soda")
+                    "Two Number 9's,"
+                    "\n a number 9 large,"
+                    "\n number 6 with extra dip,"
+                    "\n number 7,"
+                    "\n 2 number 45's, one with cheese,"
+                    "\n and a large soda")
             case _:
                 print("Command not recognised")
 
@@ -86,10 +91,8 @@ class ProgressDisplay:
     def loading_bar(self, process_name, delay, is_completed=True):
         if is_completed:
             bar_max = self.bar_max
-            success_msg = 'Completed'
         else:
-            bar_max = self.bar_max - 20
-            success_msg = 'Failed'
+            bar_max = self.bar_max - random.choice([20, 15, 10, 5])
 
         if delay > 0.2:
             self.funk_print.pr_red("WTF that delay is too long")
@@ -101,7 +104,7 @@ class ProgressDisplay:
                 time.sleep(delay)
                 bar.next()
             bar.finish()
-            self.funk_print.pr_result(is_completed)
+            self.funk_print.pr_status_msg(is_completed)
 
     def spinner(self, process_name, delay, complete_msg):
         spinner = Spinner(process_name)
@@ -116,6 +119,11 @@ class ProgressDisplay:
         while time_elapsed < delay:
             time_elapsed = time.time() - start
             spinner.next()
+        
+        spinner.finish()
+
+        if complete_msg is not None:
+            print(complete_msg)
 
 
 class FileImporter:
@@ -158,7 +166,7 @@ class FileImporter:
 
 class FunkyPrint:
 
-    def pr_result(self, result):
+    def pr_status_msg(self, result):
         if result:
             self.pr_green('Complete')
         else:
