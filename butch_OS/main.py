@@ -66,7 +66,7 @@ class ConsoleHandler:
 
         match commands[1]:
             case 'speak':
-                print(f"butch says: {self.butch.play_butch_phrase()}")
+                print(f"butch says: {self.butch.get_butch_phrase()}")
             case 'takeaway':
                 print(
                     "Two Number 9's,\n a number 9 large,\n number 6 with extra dip,\n number 7,\n 2 number 45's, one with cheese,\n and a large soda")
@@ -78,7 +78,7 @@ class Butch:
     def __init__(self, phrases):
         self.phrases = phrases
 
-    def play_butch_phrase(self):
+    def get_butch_phrase(self):
         return random.choice(self.phrases['phrases'])
 
 
