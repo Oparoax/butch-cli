@@ -16,8 +16,10 @@ class ConsoleHandler:
 
         self.butch_phrases = self.importer.phrases
         self.progress_msgs = self.importer.progress_msgs
+        self.music_links = self.importer.links
 
         self.butch = Butch(self.butch_phrases)
+        self.kioshi = Kioshi(self.music_links)
 
     def play_intro(self):
         self.progress_display.spinner('Welcome to ..', 2, "")
@@ -53,6 +55,8 @@ class ConsoleHandler:
             case 'butch':
                 self.butch_commands(keywords)
                 return
+            case 'kioshi':
+                self.kioshi_commands(keywords)
             case 'help':
                 return
             case 'exit':
@@ -63,6 +67,8 @@ class ConsoleHandler:
     def butch_commands(self, commands):
 
         match commands[1]:
+            case 'version':
+                self.butch.get_version()
             case 'speak':
                 print(f"butch says: {self.butch.get_butch_phrase()}")
             case 'takeaway':
@@ -76,13 +82,48 @@ class ConsoleHandler:
             case _:
                 print("Command not recognised")
 
+    def kioshi_commands(self, commands):
+
+        match commands[1]:
+            case 'version':
+                self.kioshi.get_version()
+            case 'play':
+                self.kioshi.play_yt_playlist()
+            case 'radio':
+                self.kioshi.play_yt_radio()
+            case _:
+                print("Command not recognised")
+
 
 class Butch:
     def __init__(self, phrases):
         self.phrases = phrases
+        self.version = "0.9.2"
+
+    def get_version(self):
+        return print(f"Version: {self.version}")
 
     def get_butch_phrase(self):
-        return random.choice(self.phrases['phrases'])
+        return random_choice(self.phrases['phrases'])
+
+
+class Kioshi:
+    def __init__(self, links):
+        self.links = links
+        self.version = "v1.2.1"
+
+    def get_version(self):
+        return print(f"Version: {self.version}")
+
+    def play_yt_playlist(self):
+        self.play_yt(self.links['playlist'])
+
+    def play_yt_radio(self):
+        self.play_yt(self.links['radio'])
+        
+    def play_yt(self, link):
+        print("Loading up ...")
+        webbrowser.open(link[0])
 
 
 class ProgressDisplay:
@@ -132,6 +173,7 @@ class FileImporter:
     def __init__(self):
         self.phrases = self.load_json_phrases()
         self.progress_msgs = self.load_json_intro_progress()
+        self.links = self.load_json_kioshi_links()
 
     def get_file_content(self, filepath):
         text_file = open(filepath, 'r')
@@ -164,6 +206,14 @@ class FileImporter:
             return progress_msgs
         else:
             print('No progress msgs could be loaded for butch')
+
+    def load_json_kioshi_links(self):
+        links = self.get_json_content('JSON/kioshi_links.json')
+
+        if links is not None:
+            return links
+        else:
+            print('No links could be loaded for kioshi')
 
 
 class FunkyPrint:
