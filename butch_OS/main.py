@@ -1,7 +1,9 @@
 import json
-import random
 import sys
-import time
+import webbrowser
+
+from random import choice as random_choice
+from time import sleep, time
 
 from progress.bar import ShadyBar
 from progress.spinner import Spinner
@@ -22,18 +24,18 @@ class ConsoleHandler:
 
         print('\n')
 
-        time.sleep(1)
+        sleep(1)
 
         print(f"{self.importer.get_file_content('Assets/title.txt')} \n")
 
         for msg in self.progress_msgs["progress_msgs"]:
             self.progress_display.loading_bar(msg['name'], msg['delay'], msg['complete'])
 
-        time.sleep(2)
+        sleep(2)
 
-        print(self.importer.get_file_content('Assets/butchportrait.txt'))
+        print(self.importer.get_file_content('Assets/butch-portrait.txt'))
 
-        time.sleep(1)
+        sleep(1)
 
         print(self.importer.get_file_content('Assets/complete.txt'))
 
@@ -92,7 +94,7 @@ class ProgressDisplay:
         if is_completed:
             bar_max = self.bar_max
         else:
-            bar_max = self.bar_max - random.choice([20, 15, 10, 5])
+            bar_max = self.bar_max - random_choice([20, 15, 10, 5])
 
         if delay > 0.2:
             self.funk_print.pr_red("WTF that delay is too long")
@@ -101,7 +103,7 @@ class ProgressDisplay:
         with ShadyBar(process_name, max=self.bar_max) as bar:
             for i in range(bar_max):
                 # Do some work
-                time.sleep(delay)
+                sleep(delay)
                 bar.next()
             bar.finish()
             self.funk_print.pr_status_msg(is_completed)
@@ -110,16 +112,16 @@ class ProgressDisplay:
         spinner = Spinner(process_name)
         time_elapsed = 0
 
-        start = time.time()
+        start = time()
 
         if delay > 5:
             self.funk_print.pr_red("WTF that delay is too long")
             return
 
         while time_elapsed < delay:
-            time_elapsed = time.time() - start
+            time_elapsed = time() - start
             spinner.next()
-        
+
         spinner.finish()
 
         if complete_msg is not None:
@@ -148,7 +150,7 @@ class FileImporter:
         return text
 
     def load_json_phrases(self):
-        phrases = self.get_json_content('Assets/butch_text.json')
+        phrases = self.get_json_content('JSON/butch_text.json')
 
         if phrases is not None:
             return phrases
@@ -156,7 +158,7 @@ class FileImporter:
             print('No phrases could be loaded for butch')
 
     def load_json_intro_progress(self):
-        progress_msgs = self.get_json_content('Assets/butch_loading_text.json')
+        progress_msgs = self.get_json_content('JSON/butch_loading_text.json')
 
         if progress_msgs is not None:
             return progress_msgs
