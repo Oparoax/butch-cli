@@ -1,6 +1,6 @@
 import sys
-import webbrowser
 
+from webbrowser import open as web_open
 from random import choice as random_choice
 from time import sleep
 
@@ -122,7 +122,7 @@ class Kioshi:
 
     def play_yt(self, link):
         print("Loading up ...")
-        webbrowser.open(link[0])
+        web_open(link[0])
 
 
 # Press the green button in the gutter to run the script.

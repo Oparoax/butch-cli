@@ -1,4 +1,4 @@
-import json
+from json import load as js_load
 
 
 class FileImporter:
@@ -19,7 +19,7 @@ class FileImporter:
 
     def get_json_content(self, filepath):
         text_file = open(filepath, 'r')
-        text = json.load(text_file)
+        text = js_load(text_file)
 
         return text
 
