@@ -1,12 +1,11 @@
-import json
 import sys
 import webbrowser
 
 from random import choice as random_choice
-from time import sleep, time
+from time import sleep
 
-from progress.bar import ShadyBar
-from progress.spinner import Spinner
+from module.file_importer import FileImporter
+from module.progress import ProgressDisplay
 
 
 class ConsoleHandler:
@@ -28,18 +27,18 @@ class ConsoleHandler:
 
         sleep(1)
 
-        print(f"{self.importer.get_file_content('Assets/title.txt')} \n")
+        print(f"{self.importer.get_file_content('assets/title.txt')} \n")
 
         for msg in self.progress_msgs["progress_msgs"]:
             self.progress_display.loading_bar(msg['name'], msg['delay'], msg['complete'])
 
         sleep(2)
 
-        print(self.importer.get_file_content('Assets/butch-portrait.txt'))
+        print(self.importer.get_file_content('assets/butch-portrait.txt'))
 
         sleep(1)
 
-        print(self.importer.get_file_content('Assets/complete.txt'))
+        print(self.importer.get_file_content('assets/complete.txt'))
 
     def listen_for_input(self):
         input_str = input()
@@ -120,115 +119,10 @@ class Kioshi:
 
     def play_yt_radio(self):
         self.play_yt(self.links['radio'])
-        
+
     def play_yt(self, link):
         print("Loading up ...")
         webbrowser.open(link[0])
-
-
-class ProgressDisplay:
-    def __init__(self):
-        self.bar_max = 100
-        self.funk_print = FunkyPrint()
-
-    def loading_bar(self, process_name, delay, is_completed=True):
-        if is_completed:
-            bar_max = self.bar_max
-        else:
-            bar_max = self.bar_max - random_choice([20, 15, 10, 5])
-
-        if delay > 0.2:
-            self.funk_print.pr_red("WTF that delay is too long")
-            return
-
-        with ShadyBar(process_name, max=self.bar_max) as bar:
-            for i in range(bar_max):
-                # Do some work
-                sleep(delay)
-                bar.next()
-            bar.finish()
-            self.funk_print.pr_status_msg(is_completed)
-
-    def spinner(self, process_name, delay, complete_msg):
-        spinner = Spinner(process_name)
-        time_elapsed = 0
-
-        start = time()
-
-        if delay > 5:
-            self.funk_print.pr_red("WTF that delay is too long")
-            return
-
-        while time_elapsed < delay:
-            time_elapsed = time() - start
-            spinner.next()
-
-        spinner.finish()
-
-        if complete_msg is not None:
-            print(complete_msg)
-
-
-class FileImporter:
-    def __init__(self):
-        self.phrases = self.load_json_phrases()
-        self.progress_msgs = self.load_json_intro_progress()
-        self.links = self.load_json_kioshi_links()
-
-    def get_file_content(self, filepath):
-        text_file = open(filepath, 'r')
-        text = text_file.read()
-        text_file.close()
-
-        if text is not None:
-            return text
-        else:
-            print(f"File not found: {filepath}")
-
-    def get_json_content(self, filepath):
-        text_file = open(filepath, 'r')
-        text = json.load(text_file)
-
-        return text
-
-    def load_json_phrases(self):
-        phrases = self.get_json_content('JSON/butch_text.json')
-
-        if phrases is not None:
-            return phrases
-        else:
-            print('No phrases could be loaded for butch')
-
-    def load_json_intro_progress(self):
-        progress_msgs = self.get_json_content('JSON/butch_loading_text.json')
-
-        if progress_msgs is not None:
-            return progress_msgs
-        else:
-            print('No progress msgs could be loaded for butch')
-
-    def load_json_kioshi_links(self):
-        links = self.get_json_content('JSON/kioshi_links.json')
-
-        if links is not None:
-            return links
-        else:
-            print('No links could be loaded for kioshi')
-
-
-class FunkyPrint:
-
-    def pr_status_msg(self, result):
-        if result:
-            self.pr_green('Complete')
-        else:
-            self.pr_red('Failed')
-
-    def pr_red(self, txt):
-        print("\033[91m {}\033[00m".format(txt))
-
-    def pr_green(self, txt):
-        print("\033[92m {}\033[00m".format(txt))
 
 
 # Press the green button in the gutter to run the script.
