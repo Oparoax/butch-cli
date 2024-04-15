@@ -12,6 +12,7 @@ from module.progress import ProgressDisplay
 class ConsoleHandler:
     def __init__(self):
         self.phrase = None
+        self.version = 1.0
 
         self.importer = FileImporter()
         self.progress_display = ProgressDisplay()
@@ -44,25 +45,33 @@ class ConsoleHandler:
         print(self.importer.get_file_content('assets/complete.txt'))
 
     def listen_for_input(self):
-        input_str = input()
+        input_str = input("<BUTCH-OS>:: ")
 
-        input_str.strip()
-        keywords = input_str.split(" ")
+        filtered_keywords = self.filter_input(input_str)
 
-        for keyword in keywords:
-            keyword = keyword.lower()
-            keyword = keyword.strip()
-
-        match keywords[0]:
+        match filtered_keywords[0]:
             case 'butch':
-                self.butch_commands(keywords)
+                self.butch_commands(filtered_keywords)
                 return
             case 'kioshi':
-                self.kioshi_commands(keywords)
+                self.kioshi_commands(filtered_keywords)
             case 'help':
                 return
             case 'exit':
                 sys.exit()
+
+    def filter_input(self, input_str):
+        # format inputs to be clear of whitespace
+        input_str = input_str.strip()
+        keywords = input_str.split(" ")
+
+        filtered_keywords = []
+
+        for keyword in keywords:
+            word = keyword.strip()
+            filtered_keywords.append(word.lower())
+
+        return filtered_keywords
 
     def butch_commands(self, commands):
 
@@ -100,6 +109,14 @@ class ConsoleHandler:
                 self.kioshi.play_yt_radio()
             case _:
                 print("Command not recognised")
+
+    def print_welcome(self):
+        welcome_string = f"= Welcome to butch-os v{self.version} ="
+        string_len = len(welcome_string)
+
+        print(string_len * "-")
+        print(welcome_string)
+        print(string_len * "-")
 
 
 class Butch:
@@ -153,9 +170,7 @@ if __name__ == '__main__':
     else:
         console.play_intro()
 
-    print("----------------------------")
-    print('= Welcome to butch-os v1.0 =')
-    print("----------------------------")
+    console.print_welcome()
 
     is_finished = False
 
