@@ -1,9 +1,9 @@
 import sys
+import pyttsx3
 
 from webbrowser import open as web_open
 from random import choice as random_choice
 from time import sleep
-import pyttsx3
 
 from module.file_importer import FileImporter
 from module.progress import ProgressDisplay
@@ -50,15 +50,19 @@ class ConsoleHandler:
         filtered_keywords = self.filter_input(input_str)
 
         match filtered_keywords[0]:
+            case 'version':
+                print(f"v{self.version}")
             case 'butch':
                 self.butch_commands(filtered_keywords)
                 return
             case 'kioshi':
                 self.kioshi_commands(filtered_keywords)
             case 'help':
-                return
+                pass
             case 'exit':
                 sys.exit()
+            case _:
+                pass
 
     def filter_input(self, input_str):
         # format inputs to be clear of whitespace
