@@ -3,6 +3,7 @@ import sys
 from webbrowser import open as web_open
 from random import choice as random_choice
 from time import sleep
+import pyttsx3
 
 from module.file_importer import FileImporter
 from module.progress import ProgressDisplay
@@ -10,6 +11,8 @@ from module.progress import ProgressDisplay
 
 class ConsoleHandler:
     def __init__(self):
+        self.phrase = None
+
         self.importer = FileImporter()
         self.progress_display = ProgressDisplay()
 
@@ -60,8 +63,6 @@ class ConsoleHandler:
                 return
             case 'exit':
                 sys.exit()
-            case _:
-                print("Command not recognised")
 
     def butch_commands(self, commands):
 
@@ -69,7 +70,14 @@ class ConsoleHandler:
             case 'version':
                 self.butch.get_version()
             case 'speak':
-                print(f"butch says: {self.butch.get_butch_phrase()}")
+                self.phrase = self.butch.get_butch_phrase()
+
+                print(f"butch says: {self.phrase}")
+                self.butch.speak(self.phrase)
+            case 'say':
+                print("What would you like butch to say?")
+                self.phrase = input()
+                self.butch.speak(self.phrase)
             case 'takeaway':
                 print(
                     "Two Number 9's,"
@@ -99,11 +107,20 @@ class Butch:
         self.phrases = phrases
         self.version = "0.9.2"
 
+        self.tts_engine = pyttsx3.init()
+
+        # Default rate is much too high (200)
+        self.tts_engine.setProperty('rate', 125)
+
     def get_version(self):
         return print(f"Version: {self.version}")
 
     def get_butch_phrase(self):
         return random_choice(self.phrases['phrases'])
+
+    def speak(self, phrase):
+        self.tts_engine.say(phrase)
+        self.tts_engine.runAndWait()
 
 
 class Kioshi:
