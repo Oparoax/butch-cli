@@ -33,7 +33,7 @@
         {
             "name": "Agression Centre, agressing",
             "delay": 0.03,
-            "complete": false
+            "complete": true
         }
     ]
 }
