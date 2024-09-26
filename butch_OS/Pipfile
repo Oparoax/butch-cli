@@ -4,6 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+progress = "*"
+pyttsx3 = "*"
 
 [dev-packages]
 
