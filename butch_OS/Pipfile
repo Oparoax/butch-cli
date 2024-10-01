@@ -8,6 +8,10 @@ progress = "*"
 pyttsx3 = "*"
 
 [dev-packages]
+flake8 = "*"
 
 [requires]
 python_version = "3.12"
+
+[scripts]
+gui = "python -m butch_OS.main"
