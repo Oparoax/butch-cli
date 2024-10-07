@@ -3,10 +3,7 @@ from setuptools import setup
 setup(
     name='butch_OS',
     version='1.0',
-    packages=['progress', 'pyttsx3'],
-    url='',
-    license='',
-    author='jdawes',
-    author_email='',
-    description='Command line app for ttrpg \'cities without numbers\''
+    packages=find_packages(),
+    scripts=['butch_OS/main.py', 'butch_OS/module/funky_print.py', 'butch_OS/module/file_importer.py', 'butch_OS/module/progress.py']
 )
+
