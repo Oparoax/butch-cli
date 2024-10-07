@@ -5,12 +5,22 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "butch-cli"
 version = "0.1"
+authors = [
+    {name = "Joseph Dawes"}
+]
+description = "Small command-line app made for a TTRPG campaign"
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: GPLv3.0 License",
+    "Operating System :: OS Independent",
+]
 dependencies = [
     "progress",
     "pyttsx3",
 	'importlib-metadata; python_version="3"'
 ]
-authors = [
-    {name = "Joseph Dawes"}
-]
 
+[project.urls]
+Homepage = "https://github.com/Oparoax/butch-cli"
