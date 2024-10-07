@@ -1,5 +1,7 @@
 from json import load as js_load
+import os
 
+CURR_DIR = os.path.dirname(__file__) + '/..'
 
 class FileImporter:
     def __init__(self):
@@ -8,7 +10,7 @@ class FileImporter:
         self.links = self.load_json_kioshi_links()
 
     def get_file_content(self, filepath):
-        text_file = open(filepath, 'r')
+        text_file = open(CURR_DIR + '/' + filepath, 'r')
         text = text_file.read()
         text_file.close()
 
@@ -18,7 +20,7 @@ class FileImporter:
             print(f"File not found: {filepath}")
 
     def get_json_content(self, filepath):
-        text_file = open(filepath, 'r')
+        text_file = open(CURR_DIR + '/' + filepath, 'r')
         text = js_load(text_file)
 
         return text

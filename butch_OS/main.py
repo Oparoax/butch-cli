@@ -5,8 +5,8 @@ from webbrowser import open as web_open
 from random import choice as random_choice
 from time import sleep
 
-from module.file_importer import FileImporter
-from module.progress import ProgressDisplay
+from .module.file_importer import FileImporter
+from .module.progress import ProgressDisplay
 
 
 class ConsoleHandler:
@@ -25,6 +25,9 @@ class ConsoleHandler:
         self.kioshi = Kioshi(self.music_links)
 
     def play_intro(self):
+        
+        print("butch_OS  Copyright (C) 2024  Joseph Dawes\n This program comes with ABSOLUTELY NO WARRANTY.\n This is free software, and you are welcome to redistribute it\n under certain conditions.")
+
         self.progress_display.spinner('Welcome to ..', 2, "")
 
         print('\n')

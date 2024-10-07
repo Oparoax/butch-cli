@@ -3,7 +3,7 @@ from time import sleep, time
 
 from progress.bar import ShadyBar
 from progress.spinner import Spinner
-from module.funky_print import FunkyPrint
+from .funky_print import FunkyPrint
 
 
 class ProgressDisplay:
