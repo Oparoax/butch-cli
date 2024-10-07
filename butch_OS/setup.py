@@ -1,9 +1,12 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='butch_OS',
     version='1.0',
     packages=find_packages(),
-    scripts=['butch_OS/main.py', 'butch_OS/module/funky_print.py', 'butch_OS/module/file_importer.py', 'butch_OS/module/progress.py']
+    entry_points={
+        'console_scripts': [
+            'my_start=butch_OS.main:main',
+        ]
+    }
 )
-
