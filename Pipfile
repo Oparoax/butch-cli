@@ -6,12 +6,13 @@ name = "pypi"
 [packages]
 progress = "*"
 pyttsx3 = "*"
+build = "*"
+
+[requires]
+python_version = "3"
+
+[scripts]
+butch_kill = "python -m butch_OS.main"
 
 [dev-packages]
 flake8 = "*"
-
-[requires]
-python_version = "3.12"
-
-[scripts]
-gui = "python -m butch_OS.main"
