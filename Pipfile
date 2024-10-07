@@ -12,7 +12,7 @@ build = "*"
 python_version = "3"
 
 [scripts]
-butch_kill = "python -m butch_OS.main"
+butch = "python -m butch_OS.main"
 
 [dev-packages]
 flake8 = "*"
