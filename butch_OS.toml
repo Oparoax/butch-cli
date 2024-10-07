@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "butch-cli"
+version = "0.1"
+dependencies = [
+    "progress",
+    "pyttsx3",
+	'importlib-metadata; python_version="3"'
+]
+authors = [
+    {name = "Joseph Dawes"}
+]
+
